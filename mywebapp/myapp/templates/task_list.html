@@ -1,0 +1,40 @@
+<!-- myapp/templates/myapp/task_list.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task List</title>
+</head>
+<body>
+    <body style="background-color: bisque";
+    <h1><strong>Hello, Bikash Soni!</strong></h1>
+    <p>Welcome to your Task List:</p>
+    <form method="post" action="{% url 'task_list' %}">
+        {% csrf_token %}
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <input type="checkbox" name="task_{{ task.id }}" {% if task.completed %}checked{% endif %}>
+                    {{ task.title }} {% if task.completed %}(Completed){% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <p>Additional Checkboxes:</p>
+        <label>
+            <input type="checkbox" name="additional_checkbox_1"> SLEEP
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" name="additional_checkbox_2"> CODE
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" name="additional_checkbox_3"> REPEAT
+        </label>
+        <br>
+
+        <button type="submit">Update Tasks</button>
+    </form>
+</body>
+</html>
